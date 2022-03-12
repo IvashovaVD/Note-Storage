@@ -5,10 +5,15 @@ from server.apps.main.models import Note
 
 
 @admin.register(Folder)
-class FolderAdmin(admin.ModelAdmin[Folder]):
-    """"""
+class FolderAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Folder
 
 
-@admin.register(Note)
-class NoteAdmin(admin.ModelAdmin[Note]):
-    """"""
+class NoteAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Note
+
+
+admin.site.register(Note, NoteAdmin)
+

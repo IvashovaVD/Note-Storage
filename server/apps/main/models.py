@@ -8,8 +8,15 @@ from django.conf import settings
 @final
 class Folder(models.Model):
     num_user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='e-mail', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, default="Доска", primary_key=True, verbose_name='Название доски для заметок')
+    name = models.CharField(max_length=100, default="Доска", primary_key=True,
+                            verbose_name='Название доски для заметок')
     release_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
 
 
 class Note(models.Model):
@@ -21,3 +28,9 @@ class Note(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["updated_at", "created_at"]
+
+    def __str__(self):
+        return self.name

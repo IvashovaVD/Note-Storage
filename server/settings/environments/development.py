@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS += (
     # Better debug:
     'debug_toolbar',
-    'nplusone.ext.django',
+    # 'nplusone.ext.django',
 
     # Linting migrations:
     'django_migration_linter',
@@ -65,7 +65,7 @@ MIDDLEWARE += (
 
     # https://github.com/bradmontgomery/django-querycount
     # Prints how many queries were executed, useful for the APIs.
-    'querycount.middleware.QueryCountMiddleware',
+    # 'querycount.middleware.QueryCountMiddleware',
 )
 
 
@@ -95,12 +95,12 @@ MIDDLEWARE = (  # noqa: WPS440
 ) + MIDDLEWARE
 
 # Logging N+1 requests:
-NPLUSONE_RAISE = True  # comment out if you want to allow N+1 requests
-NPLUSONE_LOGGER = logging.getLogger('django')
-NPLUSONE_LOG_LEVEL = logging.WARN
-NPLUSONE_WHITELIST = [
-    {'model': 'admin.*'},
-]
+# NPLUSONE_RAISE = True  # comment out if you want to allow N+1 requests
+# NPLUSONE_LOGGER = logging.getLogger('django')
+# NPLUSONE_LOG_LEVEL = logging.WARN
+# NPLUSONE_WHITELIST = [
+#     {'model': 'admin.*'},
+# ]
 
 
 # django-test-migrations

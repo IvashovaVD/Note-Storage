@@ -1,4 +1,33 @@
 body {
   text-align: center;
+  background:radial-gradient(white 40%, PaleTurquoise);
 }
 
+img {
+  width: 50px;
+  height: 50px;
+}
+
+.wemake-services-body {
+  justify-content: space-between;
+  align-items: center;
+  float: left;
+  padding:5%;
+}
+
+.wemake-services-body1 {
+  margin:100px 25%;
+  align-items: center;
+}
+
+.wemake-services-logo {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.github-corner img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}

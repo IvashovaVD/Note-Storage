@@ -3,6 +3,11 @@ from typing import Final, final
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_delete
+
+
+def user_directory_path(instance, filename):
+    return instance.tagging + '/' + filename
 
 
 class Folder(models.Model):
@@ -13,7 +18,7 @@ class Folder(models.Model):
 
     class Meta:
         ordering = ["name"]
-        unique_together = ('name', 'num_user')
+        constraints = [models.UniqueConstraint(fields=['name', 'num_user'], name="user_namef")]
 
     def __str__(self):
         return self.name
@@ -32,7 +37,28 @@ class Note(models.Model):
 
     class Meta:
         ordering = ["updated_at", "created_at"]
-        unique_together=('name', 'num_folder')
+        constraints = [models.UniqueConstraint(fields=['name', 'num_folder'], name="user_namen")]
 
     def __str__(self):
         return self.name
+
+
+class FileNote(models.Model):
+    num_folder = models.ForeignKey(Folder, related_name='files', verbose_name='Название папки',
+                                   on_delete=models.CASCADE)
+    NOTE_CHOICES = [
+        ('h', 'home'),
+        ('w', 'work'),
+        ('t', 'travel'),
+        ('s', 'study'),
+        ('p', 'project'),
+        ('o', 'other'),
+    ]
+    tagging = models.CharField(max_length=1,
+                               choices=NOTE_CHOICES,
+                               verbose_name='Примечание')
+    created_at = models.DateTimeField(auto_now_add=True)
+    filen = models.FileField(upload_to=user_directory_path, verbose_name='Загрузить файл')
+
+    def __str__(self):
+        return self.tagging

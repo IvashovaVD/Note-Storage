@@ -47,6 +47,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'health_check.db',
     'health_check.cache',
     'health_check.storage',
+    #'django_cleanup.apps.CleanupConfig',
 )
 
 MIDDLEWARE: Tuple[str, ...] = (

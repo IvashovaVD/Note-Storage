@@ -1,8 +1,11 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-from django.urls import path
+from django.urls import path, re_path
 from server.apps.main.views import index, UserViewSet
 from .views import FolderViewSet, NoteViewSet
+from ... import settings
+from django.conf.urls.static import static
+
 
 app_name = 'main'
 
@@ -15,6 +18,8 @@ router.register(r'users', UserViewSet, 'users')
 urlpatterns = [
     path('hello/', index, name='hello'),
     url(r'', include(router.urls)),
-
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

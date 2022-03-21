@@ -3,7 +3,8 @@ from typing import Final, final
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, pre_delete
+from django.dispatch import receiver
 
 
 def user_directory_path(instance, filename):
@@ -62,3 +63,8 @@ class FileNote(models.Model):
 
     def __str__(self):
         return self.tagging
+
+
+@receiver(pre_delete, sender=FileNote)
+def FileNote_delete(sender, instance, **kwargs):
+    instance.filen.delete(False)

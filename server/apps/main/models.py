@@ -48,11 +48,10 @@ class FileNote(models.Model):
     num_folder = models.ForeignKey(Folder, related_name='files', verbose_name='Название папки',
                                    on_delete=models.CASCADE)
     NOTE_CHOICES = [
-        ('h', 'home'),
-        ('w', 'work'),
-        ('t', 'travel'),
-        ('s', 'study'),
-        ('p', 'project'),
+        ('i', 'image (jpeg, png, gif, bmp, ico)'),
+        ('d', 'document (doc, docx, pdf)'),
+        ('v', 'video (MP4, AVI)'),
+        ('m', 'music (MP3, ogg)'),
         ('o', 'other'),
     ]
     tagging = models.CharField(max_length=1,

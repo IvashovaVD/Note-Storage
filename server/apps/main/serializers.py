@@ -24,16 +24,20 @@ class FolderSerializer(serializers.ModelSerializer):
         fields = ["name", "release_date", 'notes', 'files']
 
     def create(self, validated_data):
-        note_data = validated_data.pop('notes')
+        r_notes = validated_data.pop('notes')
+        r_files = validated_data.pop('files')
         folder = Folder.objects.create(**validated_data)
-        Note.objects.create(num_folder=folder, **note_data)
-        file_data = validated_data.pop('files')
-        FileNote.objects.create(num_folder=folder, **file_data)
+        for r_note in r_notes:
+            Note.objects.create(num_folder=folder, **r_note)
+        for r_file in r_files:
+            FileNote.objects.create(num_folder=folder, **r_file)
         return folder
 
     def update(self, instance, validated_data):
         note_data = validated_data.pop('notes')
         note = instance.note
+        file_data = validated_data.pop('files')
+        filenote = instance.filenote
 
         instance.name = validated_data.get('name', instance.name)
         instance.num_user = validated_data.get('num_user', instance.num_user_date)
@@ -48,6 +52,16 @@ class FolderSerializer(serializers.ModelSerializer):
             note.has_support_contract
         )
         note.save()
+
+        filenote.is_premium_member = file_data.get(
+            'is_premium_member',
+            filenote.is_premium_member
+        )
+        filenote.has_support_contract = file_data.get(
+            'has_support_contract',
+            filenote.has_support_contract
+        )
+        filenote.save()
 
         return instance
 

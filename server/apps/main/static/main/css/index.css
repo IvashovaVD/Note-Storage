@@ -8,26 +8,18 @@ img {
   height: 50px;
 }
 
-.wemake-services-body {
-  justify-content: space-between;
-  align-items: center;
-  float: left;
-  padding:5%;
+a.button7 {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(64,199,129);
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
 }
-
-.wemake-services-body1 {
-  margin:100px 25%;
-  align-items: center;
-}
-
-.wemake-services-logo {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.github-corner img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
+a.button7:hover { background: rgb(53, 167, 110); }
+a.button7:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
 }

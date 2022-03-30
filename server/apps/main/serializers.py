@@ -1,3 +1,6 @@
+from abc import ABC, ABCMeta
+
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from server.apps.main.models import Folder, Note, FileNote
@@ -6,13 +9,13 @@ from server.apps.main.models import Folder, Note, FileNote
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        exclude = ('id', 'num_folder')
+        fields = "__all__"
 
 
 class FileNoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileNote
-        exclude = ('id', 'num_folder')
+        fields = "__all__"
 
 
 class FolderSerializer(serializers.ModelSerializer):
@@ -21,49 +24,13 @@ class FolderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Folder
-        fields = ["name", "release_date", 'notes', 'files']
+        fields = ["num_user", "name", "release_date", 'notes', 'files']
 
-    def create(self, validated_data):
-        r_notes = validated_data.pop('notes')
-        r_files = validated_data.pop('files')
-        folder = Folder.objects.create(**validated_data)
-        for r_note in r_notes:
-            Note.objects.create(num_folder=folder, **r_note)
-        for r_file in r_files:
-            FileNote.objects.create(num_folder=folder, **r_file)
-        return folder
 
-    def update(self, instance, validated_data):
-        note_data = validated_data.pop('notes')
-        note = instance.note
-        file_data = validated_data.pop('files')
-        filenote = instance.filenote
-
-        instance.name = validated_data.get('name', instance.name)
-        instance.num_user = validated_data.get('num_user', instance.num_user_date)
-        instance.save()
-
-        note.is_premium_member = note_data.get(
-            'is_premium_member',
-            note.is_premium_member
-        )
-        note.has_support_contract = note_data.get(
-            'has_support_contract',
-            note.has_support_contract
-        )
-        note.save()
-
-        filenote.is_premium_member = file_data.get(
-            'is_premium_member',
-            filenote.is_premium_member
-        )
-        filenote.has_support_contract = file_data.get(
-            'has_support_contract',
-            filenote.has_support_contract
-        )
-        filenote.save()
-
-        return instance
+class FolderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Folder
+        fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,3 +41,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["email", "username", "last_name", "first_name", 'folders']  #
+
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        max_length=128,
+        min_length=8,
+        write_only=True
+    )
+
+    class Meta:
+        model = User
+        fields = ["email", "username", 'password']

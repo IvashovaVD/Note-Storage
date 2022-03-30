@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from typing import Dict, List, Tuple, Union
 
 from django.utils.translation import gettext_lazy as _
+from rest_framework.reverse import reverse_lazy
 
 from server.settings.components import BASE_DIR, config
 
@@ -38,7 +39,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'django.contrib.admindocs',
 
     # Security:
-    'axes',
+    #'axes',
 
     # Health checks:
     # You may want to enable other checks as well,
@@ -47,7 +48,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'health_check.db',
     'health_check.cache',
     'health_check.storage',
-    #'django_cleanup.apps.CleanupConfig',
+    # 'django_cleanup.apps.CleanupConfig',
 )
 
 MIDDLEWARE: Tuple[str, ...] = (
@@ -67,7 +68,7 @@ MIDDLEWARE: Tuple[str, ...] = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Axes:
-    'axes.middleware.AxesMiddleware',
+    #'axes.middleware.AxesMiddleware',
 
     # Django HTTP Referrer Policy:
     'django_http_referrer_policy.middleware.ReferrerPolicyMiddleware',
@@ -121,6 +122,7 @@ TIME_ZONE = 'UTC'
 
 STATIC_URL = '/static/'
 
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -157,11 +159,12 @@ TEMPLATES = [{
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media')
 
+
 # Django authentication system
 # https://docs.djangoproject.com/en/3.2/topics/auth/
 
 AUTHENTICATION_BACKENDS = (
-    'axes.backends.AxesBackend',
+    #'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -198,6 +201,7 @@ EMAIL_TIMEOUT = 5
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+LOGIN_REDIRECT_URL = "index"
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

@@ -1,6 +1,3 @@
-from abc import ABC, ABCMeta
-
-from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from server.apps.main.models import Folder, Note, FileNote
@@ -19,12 +16,12 @@ class FileNoteSerializer(serializers.ModelSerializer):
 
 
 class FolderSerializer(serializers.ModelSerializer):
-    notes = NoteSerializer(many=True)
-    files = FileNoteSerializer(many=True)
+    notes = NoteSerializer(many=True, read_only=True)
+    files = FileNoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Folder
-        fields = ["num_user", "name", "release_date", 'notes', 'files']
+        fields = ["id", "num_user", "name", "release_date", 'notes', 'files']
 
 
 class FolderCreateSerializer(serializers.ModelSerializer):

@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model, login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views import View
-from django.views.generic import TemplateView
 from rest_framework import viewsets
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
@@ -9,8 +8,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.reverse import reverse
 
 from .models import Folder, Note, FileNote
-from server.apps.main.serializers import FolderSerializer, NoteSerializer, UserSerializer, FolderCreateSerializer, \
-    FileNoteSerializer, RegistrationSerializer
+from server.apps.main.serializers import FolderSerializer, NoteSerializer, \
+    UserSerializer, FolderCreateSerializer, FileNoteSerializer
 
 User = get_user_model()
 
@@ -49,14 +48,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class RegistrationAPIView(viewsets.ModelViewSet):
-    permission_classes = (AllowAny,)
-    serializer_class = RegistrationSerializer
-
-
 class SignUp(View):
     def get(self, request):
-        return render(request, 'signup.html', {'form': UserCreationForm()})
+        return render(request, 'signup.html',
+                      {'form': UserCreationForm()},
+                      )
 
     def post(self, request):
         form = UserCreationForm(request.POST)
@@ -70,7 +66,9 @@ class SignUp(View):
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'main/login.html', {'form': AuthenticationForm()})
+        return render(request, 'login.html',
+                      {'form': AuthenticationForm()},
+                      )
 
     def post(self, request):
         form = AuthenticationForm(request.POST)

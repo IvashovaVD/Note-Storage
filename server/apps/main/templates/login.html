@@ -1,4 +1,4 @@
-<!--templates/registration/signup.html-->
+
 <!DOCTYPE html>
 {% load static %}
 <html class="no-js" lang="en">
@@ -17,12 +17,13 @@
 
   </head>
   <body>
+
 {% block content %}
 <table>
 <tr>
     <td  width="35%">
 <div align="left">
-<a class="button7" href="{% url 'main:login' %}">Войти</a>
+<a class="button7" href="{% url 'main:signup' %}">Регистрация</a>
 <a class="button7" href="{% url 'index' %}">Назад</a>
 </div>
     </td>
@@ -34,12 +35,12 @@
         <td width="30%">
 <div>
 
-<h1 class = "title">Регистрация</h1>
+<h1 class = "title">Вход</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <br><br>
-    <input type="submit" value="Зарегистрироваться">
+    <input type="submit" value="Войти">
 </form>
 </div>
         </td>
@@ -47,6 +48,8 @@
 
 </tr>
 </table>
+
 {% endblock %}
-  </body>
+
+    </body>
 </html>

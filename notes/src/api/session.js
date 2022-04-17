@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const CSRF_COOKIE_NAME = 'csrftoken';
-const CSRF_HEADER_NAME = 'X-CSRFToken';
+import axios from 'axios'
 
 const session = axios.create({
-  xsrfCookieName: CSRF_COOKIE_NAME,
-  xsrfHeaderName: CSRF_HEADER_NAME,
-});
+  baseURL: 'http://127.0.0.1:8000/main/',
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFTOKEN'
+})
 
-export default session;
+export default session

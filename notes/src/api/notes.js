@@ -1,16 +1,17 @@
-import { HTTP } from './common'
-
+import session from './session'
+/* eslint-disable */
 export const Note = {
   create (config) {
-    return HTTP.post('/notes/', config).then(response => {
+    return session.post('/notes/', config).then(response => {
       return response.data
-    })
+    }
+  )
   },
   delete (note) {
-    return HTTP.delete(`/notes/${note.id}/`)
+    return session.delete('/notes/${note}/')
   },
   list () {
-    return HTTP.get('/notes/').then(response => {
+    return session.get('/notes/').then(response => {
       return response.data
     })
   }

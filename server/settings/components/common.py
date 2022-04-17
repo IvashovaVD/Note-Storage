@@ -30,6 +30,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
 
     # django-admin:
     'django.contrib.admin',
@@ -55,9 +56,9 @@ MIDDLEWARE: Tuple[str, ...] = (
     # Django:
     'django.middleware.security.SecurityMiddleware',
     # django-permissions-policy
-    'django_permissions_policy.PermissionsPolicyMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,7 +147,7 @@ TEMPLATES = [{
         ],
     },
 }]
-
+CORS_ORIGIN_ALLOW_ALL = True
 # Media files
 # Media root dir is commonly changed in production
 # (see development.py and production.py).
@@ -170,7 +171,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
-
+APPEND_SLASH = False
 # Security
 # https://docs.djangoproject.com/en/3.2/topics/security/
 
@@ -206,3 +207,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissions'
     ]
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+]

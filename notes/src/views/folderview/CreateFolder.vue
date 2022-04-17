@@ -1,44 +1,31 @@
 <template lang="pug">
-  form.form-horizontal(@submit="submitForm" id="formFolder")
-    .form-group
-      .col-3
-        label.form-label Folder
-      .col-9
-        input.form-input(type="num_user" v-model="num_user" placeholder="User...")
-    .form-group
-      .col-3
-        label.form-label Title
-      .col-9
-        input.form-input(type="name" v-model="name" placeholder="Type note title...")
-
-    .form-group
-      .col-3
-      .col-9
-        button.btn.btn-primary(type="submit") Create
-      .col-3
-      .col-9
-        button.btn.btn-primary(type="reset") Clear
- </template>
+  <div class="login-view">
+    <h1>Create Folder</h1>
+    <form @submit.prevent="submit">
+      <input v-model="name" type="text" id="name" placeholder="name">
+    </form>
+    <button @click="submitForm">
+      login create folder
+    </button>
+  </div>
+</template>
 
 <script>
 export default {
   name: 'create-folder',
   data () {
     return {
-      'num_user': '',
       'name': ''
     }
   },
   methods: {
     submitForm (event) {
       this.createFolder()
-      this.num_user = ''
       this.name = ''
-
       event.preventDefault()
     },
     createFolder () {
-      this.$store.dispatch('createNote', { num_user: this.num_user, name: this.name })
+      this.$store.dispatch('createFolder', { num_user: this.num_user, name: this.name })
     }
   }
 }

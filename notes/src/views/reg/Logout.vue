@@ -1,18 +1,16 @@
-/* eslint-disable */
+ /* eslint-disable */
 <template>
-  Logout
+  <div class="log">
+  </div>
 </template>
+
 <script>
-  import { LogoutOptions } from '../types'
-  export default {
-    data (){
-      return {
-      }
-    },
-    created:function(){
-      Auth.logout();
-      console.log(Auth.getLogin());
-      this.$router.go('/home');
-    }
+export default {
+  created () {
+    this.$store.dispatch('logout')
+      .then(() => {
+        this.$router.push({ name: 'home' })
+      })
   }
+}
 </script>

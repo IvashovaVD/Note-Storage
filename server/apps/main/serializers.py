@@ -37,16 +37,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "username", "last_name", "first_name", 'folders']  #
+        fields = ["id", "email", "username", "last_name", "first_name", 'folders']  #
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        max_length=128,
-        min_length=8,
-        write_only=True
-    )
-
     class Meta:
         model = User
-        fields = ["email", "username", 'password']
+        fields = ["email", "username", "password"]

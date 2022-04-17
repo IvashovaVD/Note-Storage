@@ -1,6 +1,12 @@
 {
   "dependencies": {
     "axios": "^0.26.1",
-    "vue": "^3.2.32"
+    "cors": "^2.8.5",
+    "vue": "^3.2.32",
+    "vue-axios": "^3.4.1",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "pug": "^3.0.2"
   }
 }

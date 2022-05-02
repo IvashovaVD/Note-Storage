@@ -10,6 +10,7 @@ files serving technique in development.
 """
 
 from django.conf import settings
+from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs_urls
 from django.urls import include, path
@@ -24,7 +25,7 @@ admin.autodiscover()
 urlpatterns = [
     # Apps:
     path('main/', include(main_urls, namespace='main')),
-    #path('api-auth/', include('rest_framework.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
 
     # Health checks:
     path('health/', include(health_urls)),  # noqa: DJ05
@@ -52,9 +53,9 @@ if settings.DEBUG:  # pragma: no cover
     from django.conf.urls.static import static  # noqa: WPS433
 
     urlpatterns = [
-        # URLs specific only to django-debug-toolbar:
-        path('__debug__/', include(debug_toolbar.urls)),  # noqa: DJ05
-    ] + urlpatterns + static(  # type: ignore
+                      # URLs specific only to django-debug-toolbar:
+                      path('__debug__/', include(debug_toolbar.urls)),  # noqa: DJ05
+                  ] + urlpatterns + static(  # type: ignore
         # Serving media files in development only:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT,

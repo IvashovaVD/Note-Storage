@@ -1,32 +1,42 @@
+/* eslist-disable */
 <template lang="pug">
   <div class="login-view">
-    <h1>Create Folder</h1>
-    <form @submit.prevent="submit">
-      <input v-model="name" type="text" id="name" placeholder="name">
-    </form>
-    <button @click="submitForm">
-      login create folder
-    </button>
+    #app
+    <div class="list" v-for="not in notes">
+    <h1> {{not.name}} </h1>
+    <div>
+        <b>[{{not.release_date}}] / </b>
+    </div>
+
+    <p>{{not.name}}</p>
+    <p>{{not.textn}}</p>
+    <p>{{not.urln}}</p>
+    </div>
+
   </div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'create-folder',
+  name: 'folder-list',
   data () {
     return {
-      'name': ''
+      note: []
     }
   },
-  methods: {
-    submitForm (event) {
-      this.createFolder()
-      this.name = ''
-      event.preventDefault()
-    },
-    createFolder () {
-      this.$store.dispatch('createFolder', { num_user: this.num_user, name: this.name })
-    }
-  }
+  computed: mapGetters(['notes'])
 }
 </script>
+<style>
+  header{
+    margin-top: 50px;
+  }
+  .list {
+    position: relative;
+    padding: 15px 0;
+    outline: none;
+    letter-spacing: 1px;
+    color: black;
+    text-shadow: 0 0 1px rgb(255 255 255 / 30%);
+  }
+</style>

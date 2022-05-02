@@ -8,6 +8,7 @@
     <button @click="login(inputs)" id="login-button">
       login
     </button>
+    {{user_id}}
   </div>
 </template>
 
@@ -18,13 +19,14 @@ export default {
       inputs: {
         username: '',
         password: ''
-      }
+      },
+      user_id: ''
     }
   },
   methods: {
     login ({ username, password }) {
       this.$store.dispatch('auth/login', { username, password })
-        .then(() => this.$router.push('users'))
+        .then(() => this.$router.push('downloads/{user_id}'))
     }
   }
 }

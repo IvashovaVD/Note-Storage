@@ -1,44 +1,18 @@
 <template>
-  <div class="home">
-Registrate
+  <div class="login-view">
+    <h1>Welcome</h1>
+     <img src="../assets/logo.png" alt="image" width=50%>
+    <h2>NOTES</h2>
   </div>
 </template>
 
-<script>
-import Registrate from '../components/Registrate'
-export default {
-  name: 'Home',
-  components: {
-    Registrate
-  }
+<style>
+@import url(https://fonts.googleapis.com/css?family=Eczar);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans);
+body {
+  font-family: "Work Sans", "Segoe UI", "Helvetica Neue", sans-serif;
 }
-</script>
-
-<style scoped>
-  @import url(https://fonts.googleapis.com/css?family=Quicksand) ;
-  .home {
-    margin: 0;
-    padding: 0;
-  }
-  .bod {
-    background-color: #606366;
-    text-align: center;
-    color: white;
-    font-family: 'Quicksand', sans-serif;
-    padding: 0;
-    margin: 78px 0;
-  }
-  .bod h1 {
-    background-color: #292b2d;
-    padding: 40px 0 40px 0;
-    font-size: 32px;
-    margin: 0;
-  }
-  .bod h2 {
-    margin: 0;
-    padding: 10px 0 10px 0;
-  }
-  .bod h3 {
-    margin: 20px;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Eczar", sans-serif;
+}
 </style>

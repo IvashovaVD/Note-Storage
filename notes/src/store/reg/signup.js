@@ -22,9 +22,9 @@ export default {
     registrationLoading: false
   },
   actions: {
-    createAccount ({ commit }, { username, password1, password2, email }) {
+    createAccount ({ commit }, { username, password, email }) {
       commit(REGISTRATION_BEGIN)
-      return auth.createAccount(username, password1, password2, email)
+      return auth.createAccount(username, password, email)
         .then(() => commit(REGISTRATION_SUCCESS))
         .catch(() => commit(REGISTRATION_FAILURE))
     },

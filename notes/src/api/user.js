@@ -10,8 +10,8 @@ export const Folder = {
   delete (id) {
     return session.delete('/change/folders/' + id)
   },
-  list () {
-    return session.get('/users/').then(response => {
+  list (folder) {
+    return session.get(folder).then(response => {
       return response.data
     })
   }

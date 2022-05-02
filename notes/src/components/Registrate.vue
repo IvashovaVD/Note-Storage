@@ -1,20 +1,28 @@
 <template>
   <div class="navbar">
     <ul>
+      <li align="left"><router-link :to = "{ name:'logout' }">LOGOUT</router-link></li>
       <li align="left"><router-link :to = "{ name:'register' }">REGISTER</router-link></li>
       <li align="left"><router-link :to = "{ name:'login' }">LOGIN</router-link></li>
-      <li align="left"><router-link :to = "{ name:'logout' }">LOGOUT</router-link></li>
       <li><router-link :to = "{ name:'downloads' }">FOLDERS</router-link></li>
-      <li><router-link :to = "{ name:'' }" exact>HOME</router-link></li>
+      <li> <router-link :to = "{ name:'note' }">NOTES</router-link></li>
+      <li>
+      <router-link :to = "{ name:'home' }" exact>
+      <img src="../assets/logo.png" alt="image" width=10%>
+      home
+      </router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
   name: 'NavBar',
-  computed: mapState(['accessToken'])
+  computed:
+   mapState(['accessToken'])
 }
 </script>
 
@@ -26,13 +34,13 @@ export default {
     top: 0;
     left: 0;
     overflow: hidden;
+    justify-content: center;
   }
   h1 { font-family: 'Quicksand', sans-serif; }
   .navbar ul {
     list-style: none;
-    margin:0 14%;
+    margin:0;
     padding: 0;
-    text-align: center;
     color: white;
   }
   .navbar ul li {
@@ -61,4 +69,12 @@ export default {
   .router-link-active {
     border-color: #a72a64
   }
+@import url(https://fonts.googleapis.com/css?family=Eczar);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans);
+body {
+  font-family: "Work Sans", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Eczar", sans-serif;
+}
 </style>

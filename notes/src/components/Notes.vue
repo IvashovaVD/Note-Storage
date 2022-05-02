@@ -1,36 +1,21 @@
 <template lang="pug">
   #app
-    section.container.grid-960
-      .columns
-        .column.col-2
-        .column.col-8.col-md-12
-          create-note
-          header.text-center
-            h2 List of notes
-          note-list
-        .column.col-2
+    <h1 float="right" margin-right=10%>Notes</h1>
+    <hr>
+    note
+    <h1 float="right" margin-right=10%>Files</h1>
+    <hr>
+    file
 </template>
 /* eslint-disable */
 <script>
-import CreateNote from '../views/noteview/CreateNote'
+import FileList from '../views/fileview/FileList'
 import NoteList from '../views/noteview/NoteList'
 export default {
   name: 'app',
   components: {
-    'create-note': CreateNote,
-    'note-list': NoteList
+    'file': FileList,
+    'note': NoteList
   }
 }
 </script>
-
-<style>
-  @import url(https://fonts.googleapis.com/css?family=Eczar);
-  @import url(https://fonts.googleapis.com/css?family=Work+Sans);
-  body {
-    font-family: "Work Sans", "Segoe UI", "Helvetica Neue", sans-serif;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Eczar", sans-serif;
-  }
-
-</style>

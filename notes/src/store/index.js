@@ -3,6 +3,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { Note } from '../api/notes'
 import { Folder } from '../api/user'
+import { File } from '../api/file'
+import { FolderV } from '../api/foldernotefile'
 import createLogger from 'vuex/dist/logger'
 
 import auth from './reg/auth'
@@ -14,7 +16,11 @@ import {
   SET_NOTES,
   ADD_FOLDER,
   REMOVE_FOLDER,
-  SET_FOLDERS
+  SET_FOLDERS,
+  ADD_FILE,
+  REMOVE_FILE,
+  SET_FILES,
+  SET_FOLDERV
 } from './notes/mutation-types.js'
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -23,12 +29,16 @@ Vue.use(Vuex)
 
 const state = {
   notes: [],
-  folders: []
+  folderss: [],
+  files: [],
+  folderv: []
 }
 
 const getters = {
   notes: state => state.notes,
-  folders: state => state.folders,
+  folderss: state => state.folderss,
+  files: state => state.files,
+  folderv: state => state.folderv
 }
 
 const mutations = {
@@ -38,8 +48,13 @@ const mutations = {
   },
 
   [ADD_FOLDER] (state, folder) {
-    state.folders = [folder, ...state.folders]
+    state.folderss = [folder, ...state.folderss]
   },
+
+  [ADD_FILE] (state, file) {
+    state.files = [file, ...state.files]
+  },
+
 
   [REMOVE_NOTE] (state, { id }) {
     state.notes = state.notes.filter(note => {
@@ -48,8 +63,14 @@ const mutations = {
   },
 
   [REMOVE_FOLDER] (state, { id }) {
-    state.folders = state.folders.filter(folder => {
+    state.folderss = state.folderss.filter(folder => {
       return folder.id !== id
+    })
+  },
+
+  [REMOVE_FILE] (state, { id }) {
+    state.files = state.files.filter(file => {
+      return files.id !== id
     })
   },
 
@@ -57,8 +78,16 @@ const mutations = {
     state.notes = notes
   },
 
-  [SET_FOLDERS] (state, { folders }) {
-    state.folders = folders
+  [SET_FOLDERS] (state, { folderss }) {
+    state.folderss = folderss
+  },
+
+  [SET_FOLDERV] (state, { folderv }) {
+    state.folderv = folderv
+  },
+
+  [SET_FILES] (state, { files }) {
+    state.files = files
   }
 }
 
@@ -88,9 +117,29 @@ const actions = {
       commit(REMOVE_FOLDER, folder)
     })
   },
-  getFolders ({ commit }) {
-    Folder.list().then(folders => {
-      commit(SET_FOLDERS, { folders })
+  getFolders ({ commit }, folder) {
+    Folder.list(folder).then(folderss => {
+      commit(SET_FOLDERS, { folderss })
+    })
+  },
+  getFolderV ({ commit }) {
+    FolderV.list().then(folderv => {
+      commit(SET_FOLDERV, { folderv })
+    })
+  },
+  createFile ({ commit }, fileData) {
+    File.create(fileData).then(file => {
+      commit(ADD_FILE, file)
+    })
+  },
+  deleteFile ({ commit }, file) {
+    File.delete(file).then(response => {
+      commit(REMOVE_FILE, file)
+    })
+  },
+  getFiles ({ commit }) {
+    File.list().then(files => {
+      commit(SET_FILES, { files })
     })
   }
 }

@@ -1,29 +1,16 @@
 /* eslint-disable */
 <template lang="pug">
-  form.form-horizontal(@submit="submitForm" id="formNote")
-    .form-group
-      .col-3
-        label.form-label Folder
-      .col-9
-        input.form-input(type="text" v-model="num_folder" placeholder="Name folder...")
-    .form-group
-      .col-3
-        label.form-label Title
-      .col-9
-        input.form-input(type="text" v-model="name" placeholder="Type note title...")
-    .form-group
-      .col-3
-        label.form-label Body
-      .col-9
-        textarea.form-input(v-model="textn" rows=8 placeholder="Type your note...")
-    .form-group
-      .col-3
-      .col-9
-        button.btn.btn-primary(type="submit") Create
-      .col-3
-      .col-9
-        button.btn.btn-primary(type="reset") Clear
- </template>
+    <form class="login-view" @submit.prevent="submit">
+        <input type="text" v-model="name" placeholder="Name note...">
+        <br>
+        <i>Close view
+        <input type="checkbox" v-model="available"></i>
+        textarea.form-input(v-model="textn" rows=8 placeholder="Text your note...")
+        <input type="url" v-model="urln" placeholder="URL...">
+        <hr width="100%" size="1" color="#5A5256" />
+          <button @click="submitForm">create note</button>
+    </form>
+  </template>
 
 <script>
 export default {

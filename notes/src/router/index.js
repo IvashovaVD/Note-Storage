@@ -1,23 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/HelloWorld'
-import Folder from '../views/folderview/FolderList'
+import note from '../components/Notes'
+import folder from '../components/FolderNoteFile'
+
 import login from '../views/reg/Login'
 import register from '../views/reg/Register'
 import downloads from '../views/reg/Downloads'
 import logout from '../views/reg/Logout'
+import createfile from '../views/fileview/CreaeteFile'
+import createfolder from '../views/folderview/CreateFolder'
+import createnote from '../views/noteview/CreateNote'
 import store from '@/store'
-
-const requireAuthenticated = (to, from, next) => {
-  store.dispatch('auth/initialize')
-    .then(() => {
-      if (!store.getters['auth/isAuthenticated']) {
-        next('/users/')
-      } else {
-        next()
-      }
-    })
-}
 
 const requireUnauthenticated = (to, from, next) => {
   store.dispatch('auth/initialize')
@@ -35,6 +29,17 @@ const redirectLogout = (to, from, next) => {
     .then(() => next('/login/'))
 }
 
+const requireAuthenticated = (to, from, next) => {
+  store.dispatch('auth/initialize')
+    .then(() => {
+      if (!store.getters['auth/isAuthenticated']) {
+        next('/login')
+      } else {
+        next()
+      }
+    })
+}
+
 Vue.use(Router)
 
 export default new Router({
@@ -44,29 +49,51 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
-      beforeEnter: requireAuthenticated
-    },
-    {
-      path: '/users/',
-      name: 'user',
-      component: Folder
+      component: Home
     },
     {
       path: '/login/',
       name: 'login',
-      component: login,
-      beforeEnter: requireUnauthenticated
+      component: login
     },
     {
       path: '/signup/',
       name: 'register',
-      component: register
+      component: register,
+      beforeEnter: requireUnauthenticated
     },
     {
       path: '/users/',
       name: 'downloads',
-      component: downloads
+      component: downloads,
+      beforeEnter: requireAuthenticated
+    },
+    {
+      path: '/folders/',
+      name: 'folders',
+      component: folder,
+      beforeEnter: requireAuthenticated
+    },
+    {
+      path: '/notes/',
+      name: 'note',
+      component: note,
+      beforeEnter: requireAuthenticated
+    },
+    {
+      path: '/add/notes/',
+      name: 'createnote',
+      component: createnote
+    },
+    {
+      path: '/files/',
+      name: 'createfile',
+      component: createfile
+    },
+    {
+      path: '/folder/:id',
+      name: 'createfolder',
+      component: createfolder
     },
     {
       path: '/logout',

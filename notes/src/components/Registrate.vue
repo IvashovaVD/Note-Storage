@@ -5,11 +5,11 @@
       <li align="left"><router-link :to = "{ name:'register' }">REGISTER</router-link></li>
       <li align="left"><router-link :to = "{ name:'login' }">LOGIN</router-link></li>
       <li><router-link :to = "{ name:'downloads' }">FOLDERS</router-link></li>
-      <li> <router-link :to = "{ name:'note' }">NOTES</router-link></li>
+            <li></li><li></li><li></li><li></li>
       <li>
       <router-link :to = "{ name:'home' }" exact>
-      <img src="../assets/logo.png" alt="image" width=10%>
-      home
+      <img src="../assets/logo.png" alt="image" width=20px>
+      note-storage
       </router-link>
       </li>
     </ul>
@@ -18,11 +18,18 @@
 
 <script>
 import { mapState } from 'vuex'
-
+import axios from 'axios'
 export default {
   name: 'NavBar',
-  computed:
-   mapState(['accessToken'])
+  computed: mapState(['accessToken']),
+  methods: {
+    created () {
+      axios.get('http://127.0.0.1:8000/main/users/49/')
+        .then(response => {
+          this.user = response.data
+        })
+    }
+  }
 }
 </script>
 
@@ -36,7 +43,6 @@ export default {
     overflow: hidden;
     justify-content: center;
   }
-  h1 { font-family: 'Quicksand', sans-serif; }
   .navbar ul {
     list-style: none;
     margin:0;
@@ -76,5 +82,8 @@ body {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Eczar", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
 }
 </style>

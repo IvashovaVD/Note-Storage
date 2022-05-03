@@ -1,14 +1,12 @@
 /* eslist-disable */
 <template lang="pug">
   <div>
-    <form class="note-view" v-for="file in files">
+    <form class="note-view" v-for="file in folderss.files">
+        <button class="b" @click="deleteNote(file)" float="left">delete</button>
         <i class="tag">{{file.tagging}}</i>
         <a class="tag" v-bind:href="file.filen">{{file.filen}}</a>
         <hr width="100%" size="1" color="#5A5256" />
-        <input type="file" placeholder="filen...">
-        <hr width="100%" size="1" color="#5A5256" />
-        <button class="b" @click="updateNote(file)">update</button>
-        <button class="b" @click="deleteNote(file)" float="left">delete</button>
+        <i id="file.filen">id file: {{file.id}}, </i>
         <i class="folder-subject">create:  {{file.created_at}}</i>
     </form>
   </div>
@@ -17,14 +15,11 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'file',
-  computed: mapGetters(['files']),
+  computed: mapGetters(['folderss']),
   methods: {
     deleteFile (file) {
       this.$store.dispatch('deleteFile', file)
     }
-  },
-  beforeMount () {
-    this.$store.dispatch('getFiles')
   }
 }
 </script>
@@ -36,7 +31,7 @@ export default {
 }
 .note-view {clear:both; text-align:right;}
 .note-view b, p, h3, .b {float:left; padding-right:20px;}
-.note-view input {width:90%;}
+.note-view input {width:100%;}
 .note-view .che {width:5%;}
 .tag {
     font-family: Helvetica, Arial, sans-serif;

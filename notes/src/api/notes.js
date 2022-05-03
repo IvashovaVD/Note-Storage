@@ -8,7 +8,7 @@ export const Note = {
   )
   },
   delete (note) {
-    return session.delete('/notes/${note}/')
+    return session.delete(note)
   },
   list () {
     return session.get('/notes/').then(response => {

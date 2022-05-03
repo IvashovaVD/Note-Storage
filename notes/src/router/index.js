@@ -9,6 +9,7 @@ import register from '../views/reg/Register'
 import downloads from '../views/reg/Downloads'
 import logout from '../views/reg/Logout'
 import createfile from '../views/fileview/CreaeteFile'
+import files from '../views/fileview/Files'
 import createfolder from '../views/folderview/CreateFolder'
 import createnote from '../views/noteview/CreateNote'
 import store from '@/store'
@@ -69,15 +70,9 @@ export default new Router({
       beforeEnter: requireAuthenticated
     },
     {
-      path: '/folders/',
-      name: 'folders',
+      path: '/notes&files/',
+      name: 'filesnote',
       component: folder,
-      beforeEnter: requireAuthenticated
-    },
-    {
-      path: '/notes/',
-      name: 'note',
-      component: note,
       beforeEnter: requireAuthenticated
     },
     {
@@ -86,12 +81,22 @@ export default new Router({
       component: createnote
     },
     {
+      path: '/change/notes/',
+      name: 'note',
+      component: note
+    },
+    {
       path: '/files/',
       name: 'createfile',
       component: createfile
     },
     {
-      path: '/folder/:id',
+      path: '/files/',
+      name: 'files',
+      component: files
+    },
+    {
+      path: '/folders/',
       name: 'createfolder',
       component: createfolder
     },

@@ -1,42 +1,39 @@
 /* eslist-disable */
 <template lang="pug">
-  <div class="login-view">
-    #app
-    <div class="list" v-for="not in notes">
-    <h1> {{not.name}} </h1>
-    <div>
-        <b>[{{not.release_date}}] / </b>
-    </div>
-
-    <p>{{not.name}}</p>
-    <p>{{not.textn}}</p>
-    <p>{{not.urln}}</p>
-    </div>
-
+<div>
+  <code>Create date folder {{folderss.release_date}}. Folder created in Note-Storage </code>
+  <div class="list-view" >
+       <h2>{{folderss.name}}</h2>
   </div>
+  <div class="list-view" >
+    <div v-for="not in folderss.notes">
+    <ul>
+    <li class="list-li">
+    <h4 style="color:#3fb984">{{not.name}} (Note)</h4>
+        <sup>date create: {{not.created_at}}</sup> <br>
+        <sup>date update: {{not.updated_at}}</sup>
+        <hr>
+    <kbd width="100%">{{not.textn}}</kbd>
+    <a v-bind:href="not.urln" class="list-a">{{not.urln}}</a>
+    </li>
+    </ul>
+    </div>
+  </div>
+    </div>
 </template>
 <script>
+import Files from '../fileview/Files'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'folder-list',
+  name: 'createfolder',
+  components: {
+    'files': Files
+  },
   data () {
     return {
       note: []
     }
   },
-  computed: mapGetters(['notes'])
+  computed: mapGetters(['folderss'])
 }
 </script>
-<style>
-  header{
-    margin-top: 50px;
-  }
-  .list {
-    position: relative;
-    padding: 15px 0;
-    outline: none;
-    letter-spacing: 1px;
-    color: black;
-    text-shadow: 0 0 1px rgb(255 255 255 / 30%);
-  }
-</style>

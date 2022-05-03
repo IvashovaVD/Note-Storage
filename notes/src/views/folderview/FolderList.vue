@@ -2,19 +2,21 @@
 <template lang="pug">
   <div class="login-view">
     #app
-    <h1> {{users.username}} </h1>
+    <h1> {{user.username}} </h1>
 
     <div>
-        <b>[{{users.id}}] / </b>
-        <b>{{users.username}} / </b>
-        <b>{{users.email}}</b>
+        <b>[{{user.id}}] / </b>
+        <b>{{user.username}} / </b>
+        <b>{{user.email}}</b>
     </div>
-    <div class="list" v-for="folder in users.folders">
+    <div class="list" v-for="folder in user.folders">
     <pre>{{folder}}   </pre>
-    <router-link :to = "{ name:'createfolder' }">
-    <button style="background-color:white; color:black; font-size:10px">preview</button>
+    <router-link :to = "{ name:'filesnote' }">
+    <button style="background-color:white; color:black; font-size:10px" @click="getFolders(folder)">preview</button>
     </router-link>
-    <button style="background-color:#3fb984; color:black; font-size:10px" @click="changeFolder(folder)">change</button>
+    <router-link :to = "{ name:'note' }">
+    <button style="background-color:#3fb984; color:black; font-size:10px" @click="getFolders(folder)">change</button>
+    </router-link>
     <button style="background-color:#a72a64; color:white; font-size:10px" @click="deleteFolder(folder)">delete</button>
     <hr>
     </div>
@@ -32,7 +34,8 @@ export default {
   name: 'folder-list',
   data () {
     return {
-      users: [],
+      user: [],
+      folders: [],
       'name': '',
       'num_user': '',
       'message': ''
@@ -44,13 +47,13 @@ export default {
       this.message = 'Folder deleted. Update page and show'
       alert(this.message)
       axios.delete(folder)
-      this.getFolders()
     },
-    getFolders () {
-      axios.get('http://127.0.0.1:8000/main/users/49/')
+    getFolders (folder) {
+      axios.get(folder)
         .then(response => {
-          this.users = response.data
+          this.folders = response.data
         })
+      this.$store.dispatch('getFolders', folder)
     },
     submitFolder (id) {
       // eslint-disable-next-line
@@ -59,7 +62,6 @@ export default {
       this.createFolder(id)
       this.num_user = this.id
       this.name = ''
-      this.getFolders()
       event.preventDefault()
     },
     createFolder (id) {
@@ -69,7 +71,7 @@ export default {
   created () {
     axios.get('http://127.0.0.1:8000/main/users/49/')
       .then(response => {
-        this.users = response.data
+        this.user = response.data
       })
   }
 }

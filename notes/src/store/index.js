@@ -1,9 +1,9 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { Note } from '../api/notes'
 import { Folder } from '../api/user'
 import { File } from '../api/file'
+import { Note } from '../api/notes'
 import { FolderV } from '../api/foldernotefile'
 import createLogger from 'vuex/dist/logger'
 
@@ -28,17 +28,11 @@ const debug = process.env.NODE_ENV !== 'production';
 Vue.use(Vuex)
 
 const state = {
-  notes: [],
-  folderss: [],
-  files: [],
-  folderv: []
+  folderss: []
 }
 
 const getters = {
-  notes: state => state.notes,
-  folderss: state => state.folderss,
-  files: state => state.files,
-  folderv: state => state.folderv
+  folderss: state => state.folderss
 }
 
 const mutations = {
@@ -97,11 +91,6 @@ const actions = {
       commit(ADD_NOTE, note)
     })
   },
-  deleteNote ({ commit }, note) {
-    Note.delete(note).then(response => {
-      commit(REMOVE_NOTE, note)
-    })
-  },
   getNotes ({ commit }) {
     Note.list().then(notes => {
       commit(SET_NOTES, { notes })
@@ -130,11 +119,6 @@ const actions = {
   createFile ({ commit }, fileData) {
     File.create(fileData).then(file => {
       commit(ADD_FILE, file)
-    })
-  },
-  deleteFile ({ commit }, file) {
-    File.delete(file).then(response => {
-      commit(REMOVE_FILE, file)
     })
   },
   getFiles ({ commit }) {

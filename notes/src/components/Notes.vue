@@ -4,22 +4,20 @@
     <ul>
        <li><a>NOTES</a>
          <ul>
-            <li  v-for="note in folderss.notes">
-            <a href="#note.name">{{note.name}}</a>
+            <li v-for="note in folderss.notes">
+            <a href="#note">{{note.name}}</a>
             </li>
          </ul>
        </li>
        <li><a>FILES</a>
          <ul>
-              <li  v-for="file in folderss.files">
-              <a href="#file.filen">{{file.filen}}</a>
+              <li  v-for="file in folderss.files"  style="margin:0; padding:0;">
+              <a href="#file">id file: {{file.id}}</a>
               </li>
          </ul>
        </li>
     </ul>
     </div>
-    <br><br>
-    <hr>
     note
     <hr>
     file
@@ -46,23 +44,20 @@ export default {
   margin: 0;
   padding: 0;
   margin-top:25px;
-  background:#819A32;
+  background:#2f3033;
   height: 50px;
 }
 .filenote a {
-  text-decoration: none;
-  background:#819A32;
-  color:#fff;
-  padding:0px 15px;
-  font-family: arial;
-  line-height:50px;
-  display: block;
-  border-right: 1px solid #677B27;
-  -moz-transition: all 0.3s 0.01s ease;
-  -o-transition: all 0.3s 0.01s ease;
-  -webkit-transition: all 0.3s 0.01s ease;
+    text-decoration: none;
+    background: #2f3033;
+    color: #fbfbfe;
+    padding: 0px 15px;
+    font-family: arial;
+    line-height: 50px;
+    display: block;
+  border-bottom: 2px solid #ffffff;
 }
-.filenote a:hover {background:#D43737;}
+.filenote a:hover {background:#3fa67d;}
 .filenote li {
   float:left;
   position:relative;

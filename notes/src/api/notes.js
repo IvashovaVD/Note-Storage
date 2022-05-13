@@ -7,9 +7,7 @@ export const Note = {
     }
   )
   },
-  delete (note) {
-    return session.delete(note)
-  },
+
   list () {
     return session.get('/notes/').then(response => {
       return response.data

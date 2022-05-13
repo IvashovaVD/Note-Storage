@@ -22,7 +22,7 @@
     </div>
     <form>
       <input v-model="name" type="text" id="name" placeholder="name">
-          <button @click="submitFolder(users.id)">create folder</button>
+          <button @click="submitFolder(user.id)">create folder</button>
     </form>
 
   </div>
@@ -49,15 +49,11 @@ export default {
       axios.delete(folder)
     },
     getFolders (folder) {
-      axios.get(folder)
-        .then(response => {
-          this.folders = response.data
-        })
       this.$store.dispatch('getFolders', folder)
     },
     submitFolder (id) {
       // eslint-disable-next-line
-      this.message = 'Folder '+ this.name +' created'
+      this.message = 'Folder '+ this.name +' created. Update page and look for'
       alert(this.message)
       this.createFolder(id)
       this.num_user = this.id

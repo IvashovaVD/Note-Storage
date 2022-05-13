@@ -1,41 +1,59 @@
 <template lang="pug">
-  <div class="login-view">
-    <router-link :to = "{ name:'note' }">NOTES</router-link>
-    <h1>Create File</h1>
+  <div>
+    <button style="float:left; background:white"><router-link :to = "{ name:'note' }">BACK</router-link></button>
 
-    <form @submit.prevent="submit">
+    <div @submit.prevent="submit" class="login-view">
+        <h3>Create note for Folder: {{folderss.id}} - {{folderss.name}}</h3>
+    <div style="float:left">
       <strong>tagging</strong>
-      <select v-model="tagging" id="tagging" placeholder="i">
-        <option>i</option>
+      <select v-model="tagging" id="tagging" value="i">
+        <option selected>i</option>
         <option>d</option>
         <option>v</option>
         <option>m</option>
         <option>o</option>
       </select>
-       <strong v-model="tag" id="tag" v-if="tagging=='i'">image</strong>
-       <strong v-model="tag" id="tag" v-else-if="tagging=='d'">document</strong>
-       <strong v-model="tag" id="tag" v-else="tagging=='o'">other</strong>
-    </form>
-    <button @click="submitForm">create file</button>
+       <strong v-model="tagging" id="tag" v-if="tagging=='i'">image</strong>
+       <strong v-model="tagging" id="tag" v-else-if="tagging=='d'">document</strong>
+       <strong v-model="tagging" id="tag" v-else-if="tagging=='v'">vidio</strong>
+       <strong v-model="tagging" id="tag" v-else-if="tagging=='m'">music</strong>
+       <strong v-model="tagging" id="tag" v-else="tagging=='o'">other</strong>
+       <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+       </div>
+       <button@click="submitForm(folderss.id)">add file</button>
+    </div>
+
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'createfile',
+  computed: mapGetters(['folderss']),
   data () {
     return {
-      'tagging': ''
+      'tagging': 'i',
+      'filen': ''
     }
   },
   methods: {
-    submitForm (event) {
-      this.createFile()
+    handleFileUpload () {
+      this.file = this.$refs.file.files[0]
+    },
+    submitForm (id) {
+      this.createFile(id)
       this.tagging = ''
+      this.filen = ''
       event.preventDefault()
     },
-    createFile () {
-      this.$store.dispatch('createFile', {tagging: this.tagging})
+    createFile (id) {
+      let formData = new FormData()
+      formData.append('num_folder', id)
+      formData.append('tagging', this.tagging)
+      formData.append('filen', this.file)
+      this.$store.dispatch('createFile', formData)
+      alert('SUCCESS')
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" id="top">
     <ul>
       <li align="left"><router-link :to = "{ name:'logout' }">LOGOUT</router-link></li>
       <li align="left"><router-link :to = "{ name:'register' }">REGISTER</router-link></li>

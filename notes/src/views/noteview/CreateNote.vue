@@ -1,17 +1,20 @@
 /* eslint-disable */
 <template lang="pug">
 <div>
-    <form class="login-view">
+ <button style="float:left; background:white"><router-link :to = "{ name:'note' }">BACK</router-link></button>
+
+    <div @submit.prevent="submit" class="login-view">
+        <h3>ADD file for Folder: {{folderss.id}} - {{folderss.name}}</h3>
         <input type="text" v-model="name" placeholder="Name note...">
         <br>
         textarea.form-input(v-model="textn" rows=8 placeholder="Text your note...")
         <input type="url" v-model="urln" placeholder="URL...">
         <hr width="100%" size="1" color="#5A5256" />
-<div v-for="f in folderss.notes" class="login-view" id="noteid">
-<button @click="submitForm(f.num_folder)">create note</button>
-</div>
-</form>
 
+<button @click="submitForm(folderss.id)">create note</button>
+
+</form>
+</div>
 </div>
   </template>
 
@@ -35,7 +38,7 @@ export default {
       this.name = ''
       this.textn = ''
       this.urln = ''
-
+      alert('SUCCESS')
       event.preventDefault()
     },
     createNote () {

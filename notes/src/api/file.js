@@ -7,9 +7,6 @@ export const File = {
     }
   )
   },
-  delete (note) {
-    return session.delete('/files/${file}/')
-  },
   list () {
     return session.get('/files/').then(response => {
       return response.data

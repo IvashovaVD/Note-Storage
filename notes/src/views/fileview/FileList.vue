@@ -2,23 +2,29 @@
 <template lang="pug">
   <div>
     <form class="note-view" v-for="file in folderss.files">
-        <button class="b" @click="deleteNote(file)" float="left">delete</button>
         <i class="tag">{{file.tagging}}</i>
         <a class="tag" v-bind:href="file.filen">{{file.filen}}</a>
+        <button @click="deleteFile(file.id)">delete</button>
         <hr width="100%" size="1" color="#5A5256" />
-        <i id="file.filen">id file: {{file.id}}, </i>
+        <i id="file">id file: {{file.id}}, </i>
         <i class="folder-subject">create:  {{file.created_at}}</i>
     </form>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 export default {
   name: 'file',
   computed: mapGetters(['folderss']),
   methods: {
     deleteFile (file) {
-      this.$store.dispatch('deleteFile', file)
+      // eslint-disable-next-line
+      this.message = 'File deleted'
+      alert(this.message)
+      // eslint-disable-next-line
+      this.message='http://127.0.0.1:8000/main/files/'+ file +'/'
+      axios.delete(this.message)
     }
   }
 }
@@ -29,11 +35,11 @@ export default {
    margin:0 30%;
    padding:3%
 }
-.note-view {clear:both; text-align:right;}
+.note-view {clear:both;}
 .note-view b, p, h3, .b {float:left; padding-right:20px;}
 .note-view input {width:100%;}
 .note-view .che {width:5%;}
-.tag {
+.note-view .tag {
     font-family: Helvetica, Arial, sans-serif;
     background: #a72a64;;
     display: inline-block;
@@ -45,17 +51,5 @@ export default {
     text-decoration: none;
 }
 
-a:hover {text-decoration: none; color: #a9788a;}
-
-.tag:after {
-    display: inline-block;
-    border: 20px solid;
-    border-color: transparent transparent transparent #a9788a;
-    height: 0;
-    width: 0;
-    position: absolute;
-    right: -40px;
-    top: 0;
-    content: "";
-}
+.note-view .tag:hover {text-decoration: none;}
 </style>

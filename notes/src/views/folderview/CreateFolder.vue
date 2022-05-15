@@ -6,7 +6,7 @@
        <h2>{{folderss.name}}</h2>
   </div>
   <div class="list-view" >
-    <div v-for="(not,index) in folderss.notes"  v-if="index != 0">
+    <div v-for="(not,index) in folderss.notes">
     <ul>
     <li class="list-li">
     <h4 style="color:#3fb984">{{not.name}} (Note)</h4>

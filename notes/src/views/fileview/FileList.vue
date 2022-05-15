@@ -4,7 +4,7 @@
     <form class="note-view" v-for="file in folderss.files">
         <i class="tag">{{file.tagging}}</i>
         <a class="tag" v-bind:href="file.filen">{{file.filen}}</a>
-        <button @click="deleteFile(file.id)">delete</button>
+        <button @click="deleteFile(file.id)"  style="float:right">delete</button>
         <hr width="100%" size="1" color="#5A5256" />
         <i id="file">id file: {{file.id}}, </i>
         <i class="folder-subject">create:  {{file.created_at}}</i>

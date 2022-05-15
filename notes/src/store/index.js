@@ -28,11 +28,13 @@ const debug = process.env.NODE_ENV !== 'production';
 Vue.use(Vuex)
 
 const state = {
-  folderss: []
+  folderss: [],
+  user: []
 }
 
 const getters = {
-  folderss: state => state.folderss
+  folderss: state => state.folderss,
+  user: state => state.user
 }
 
 const mutations = {
@@ -76,8 +78,8 @@ const mutations = {
     state.folderss = folderss
   },
 
-  [SET_FOLDERV] (state, { folderv }) {
-    state.folderv = folderv
+  [SET_FOLDERV] (state, { user }) {
+    state.user = user
   },
 
   [SET_FILES] (state, { files }) {
@@ -111,9 +113,9 @@ const actions = {
       commit(SET_FOLDERS, { folderss })
     })
   },
-  getFolderV ({ commit }) {
-    FolderV.list().then(folderv => {
-      commit(SET_FOLDERV, { folderv })
+  getFolderV ({ commit }, username) {
+    FolderV.list(username).then(user => {
+      commit(SET_FOLDERV, { user })
     })
   },
   createFile ({ commit }, fileData) {

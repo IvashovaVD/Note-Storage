@@ -1,6 +1,6 @@
 <template lang="pug">
   <div>
-    <button style="float:left; background:white"><router-link :to = "{ name:'note' }">BACK</router-link></button>
+    <button style="float:left; background:white"><router-link :to = "{ name:'downloads' }">BACK</router-link></button>
 
     <div @submit.prevent="submit" class="login-view">
         <h3>Create note for Folder: {{folderss.id}} - {{folderss.name}}</h3>

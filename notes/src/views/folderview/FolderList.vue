@@ -1,7 +1,8 @@
 /* eslist-disable */
 <template lang="pug">
-  <div class="login-view">
-    #app
+<div>
+
+    <div class="login-view" v-for="user in user">
     <h1> {{user.username}} </h1>
 
     <div>
@@ -24,8 +25,8 @@
       <input v-model="name" type="text" id="name" placeholder="name">
           <button @click="submitFolder(user.id)">create folder</button>
     </form>
-
-  </div>
+</div>
+</div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -34,14 +35,13 @@ export default {
   name: 'folder-list',
   data () {
     return {
-      user: [],
       folders: [],
       'name': '',
       'num_user': '',
       'message': ''
     }
   },
-  computed: mapGetters(['folderss']),
+  computed: mapGetters(['user']),
   methods: {
     deleteFolder (folder) {
       this.message = 'Folder deleted. Update page and show'
@@ -63,12 +63,6 @@ export default {
     createFolder (id) {
       this.$store.dispatch('createFolder', { num_user: id, name: this.name })
     }
-  },
-  created () {
-    axios.get('http://127.0.0.1:8000/main/users/49/')
-      .then(response => {
-        this.user = response.data
-      })
   }
 }
 </script>

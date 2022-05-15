@@ -2,7 +2,7 @@ import session from './session'
 /* eslint-disable */
 export const FolderV = {
   create (config) {
-    return session.post('/main/folders/', config).then(response => {
+    return session.post('/users/', config).then(response => {
       return response.data
     }
     )
@@ -10,9 +10,13 @@ export const FolderV = {
   delete (folders) {
     return session.delete('/main/folders/${folders}/')
   },
-  list () {
-    return session.get('/main/folders/').then(response => {
-      return response.data
+  list (username) {
+    return session.get('/users/', {
+    params: {
+        username: username
+        }})
+        .then(response => {
+           return response.data
     })
   }
 }

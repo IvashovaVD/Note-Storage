@@ -1,7 +1,6 @@
 <template>
   <div class="login-view">
     <h1>Login</h1>
-
     <form @submit.prevent="submit">
       <input v-model="inputs.username" type="text" id="username" placeholder="username">
       <input v-model="inputs.password" type="password" id="password" placeholder="password">
@@ -13,26 +12,22 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
       inputs: {
         username: '',
         password: ''
-      },
-      user: ''
+      }
     }
   },
   methods: {
+    /* eslint-disable */
     login ({ username, password }) {
       this.$store.dispatch('auth/login', { username, password })
-        .then(() => {
-          axios.get('http://127.0.0.1:8000/main/users/')
-            .then(response => {
-              this.user = response.data
-              this.$router.push({ name: 'downloads' })
-            })
+        .then(response => {
+        this.$store.dispatch('getFolderV', username)
+        this.$router.push({ name: 'downloads' })
         })
     }
   }

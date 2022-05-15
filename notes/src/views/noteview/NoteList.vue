@@ -7,20 +7,16 @@
   </a>
     <form class="note-view" v-for="(note,index) in folderss.notes">
         <h3 id="note">{{note.name}}</h3>
-         <button class="b" @click="submitNote(note.id)" style="float:right; background:#3fa67d" v-if="index != 0">update</button>
-         <button class="b" @click="deleteN(note.id)" style="float:right; background: #a72a64;" v-if="index != 0">delete</button>
+         <button class="b" @click="deleteN(note.id)" style="float:right">delete</button>
         <br>
-        <input type="text" v-model="name" placeholder="Change Name note..."   v-if="index != 0">
         <br>
 
         <hr width="100%" size="1" color="#5A5256" />
          <b>Text note</b>
         <code>{{note.textn}} </code>
-        textarea.form-input(v-model="textn" rows=8 placeholder="Change Text your note..." v-if="index != 0")
         <hr width="100%" size="1" color="#5A5256" />
         <b>url</b>
         <i>{{note.urln}} </i>
-        <input type="url" v-model="urln" placeholder="Change URL..." v-if="index != 0">
         <hr width="100%" size="1" color="#5A5256" />
         <i class="folder-subject">create:  {{note.created_at}}</i>
         <br>

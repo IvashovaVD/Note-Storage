@@ -7,9 +7,7 @@
     <template v-else-if="!registrationCompleted">
       <form @submit.prevent="submit">
         <input v-model="inputs.username" type="text" id="username" placeholder="username">
-        <input v-model="inputs.password1" type="password" id="password1" placeholder="password">
-        <input v-model="inputs.password2" type="password" id="password2"
-          placeholder="confirm password">
+        <input v-model="inputs.password" type="password" id="password" placeholder="password">
         <input v-model="inputs.email" type="email" id="email" placeholder="email">
       </form>
       <button @click="createAccount(inputs)">
@@ -39,7 +37,7 @@ export default {
     return {
       inputs: {
         username: '',
-        password1: '',
+        password: '',
         password2: '',
         email: ''
       }
@@ -54,6 +52,10 @@ export default {
     'createAccount',
     'clearRegistrationStatus'
   ]),
+  createAccount ({username, password, email}) {
+    this.$store.dispatch('auth/signup', { username, password, email })
+    this.$store.dispatch('auth/login', { username, password })
+  },
   beforeRouteLeave (to, from, next) {
     this.clearRegistrationStatus()
     next()

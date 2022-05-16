@@ -1,12 +1,11 @@
 /* eslint-disable */
 <template lang="pug">
 <div>
- <button style="float:left; background:white"><router-link :to = "{ name:'downloads' }">BACK</router-link></button>
+ <button style="float:left; background:white"><router-link :to = "{ name:'note' }">BACK</router-link></button>
 
     <div @submit.prevent="submit" class="login-view">
-        <h3>ADD file for Folder: {{folderss.id}} - {{folderss.name}}</h3>
+        <h2>Folder: {{folderss.name}}</h2>
         <input type="text" v-model="name" placeholder="Name note...">
-        <br>
         textarea.form-input(v-model="textn" rows=8 placeholder="Text your note...")
         <input type="url" v-model="urln" placeholder="URL...">
         <hr width="100%" size="1" color="#5A5256" />
@@ -44,6 +43,10 @@ export default {
     createNote () {
       this.$store.dispatch('createNote', { num_folder: this.num_folder, name: this.name, textn: this.textn, urln: this.urln, available: false })
     }
+  },
+  created () {
+    let folder = this.$cookies.get('folder')
+    this.$store.dispatch('getFolders', folder)
   }
 }
 </script>

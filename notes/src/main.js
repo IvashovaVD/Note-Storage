@@ -4,7 +4,9 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import Axios from 'axios'
+import VueCookies from 'vue-cookies'
 
+Vue.use(VueCookies)
 Vue.config.productionTip = false
 
 const eventsHub = new Vue()

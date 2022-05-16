@@ -1,9 +1,9 @@
 <template lang="pug">
   <div>
-    <button style="float:left; background:white"><router-link :to = "{ name:'downloads' }">BACK</router-link></button>
+    <button style="float:left; background:white"><router-link :to = "{ name:'note' }">BACK</router-link></button>
 
     <div @submit.prevent="submit" class="login-view">
-        <h3>Create note for Folder: {{folderss.id}} - {{folderss.name}}</h3>
+        <h2>Folder: {{folderss.name}}</h2>
     <div style="float:left">
       <strong>tagging</strong>
       <select v-model="tagging" id="tagging" value="i">
@@ -55,6 +55,10 @@ export default {
       this.$store.dispatch('createFile', formData)
       alert('SUCCESS')
     }
+  },
+  created () {
+    let folder = this.$cookies.get('folder')
+    this.$store.dispatch('getFolders', folder)
   }
 }
 </script>

@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
 export default {
   data () {
     return {
@@ -26,9 +27,14 @@ export default {
     login ({ username, password }) {
       this.$store.dispatch('auth/login', { username, password })
         .then(response => {
-        this.$store.dispatch('getFolderV', username)
+        VueCookies.set('username', username, 'expiring time')
         this.$router.push({ name: 'downloads' })
-        })
+        }
+        )
+      .catch(e => {
+        alert('error in login or password')
+        this.$router.push({ name: 'logout' })
+      })
     }
   }
 }

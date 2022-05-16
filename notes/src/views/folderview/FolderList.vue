@@ -21,34 +21,33 @@
     <button style="background-color:#a72a64; color:white; font-size:10px" @click="deleteFolder(folder)">delete</button>
     <hr>
     </div>
-    <form>
       <input v-model="name" type="text" id="name" placeholder="name">
           <button @click="submitFolder(user.id)">create folder</button>
-    </form>
 </div>
 </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import axios from 'axios'
 export default {
   name: 'folder-list',
   data () {
     return {
-      folders: [],
+      user: [],
       'name': '',
       'num_user': '',
-      'message': ''
+      'message': '',
+      'username': ''
     }
   },
-  computed: mapGetters(['user']),
   methods: {
     deleteFolder (folder) {
       this.message = 'Folder deleted. Update page and show'
       alert(this.message)
       axios.delete(folder)
+      this.$router.push({ name: 'downloads' })
     },
     getFolders (folder) {
+      this.$cookies.set('folder', folder, 'expiring time')
       this.$store.dispatch('getFolders', folder)
     },
     submitFolder (id) {
@@ -62,7 +61,23 @@ export default {
     },
     createFolder (id) {
       this.$store.dispatch('createFolder', { num_user: id, name: this.name })
+      this.$router.push({ name: 'downloads' })
     }
+  },
+  created () {
+    let userNm = this.$cookies.get('username')
+    axios.get('http://127.0.0.1:8000/main/users/', {
+      params: {
+        username: userNm
+      }})
+      .then(response => {
+        this.$store.dispatch('getFolderV', userNm)
+        this.user = response.data
+      })
+      .catch(e => {
+        alert('error in login or password')
+        this.$router.push({ name: 'logout' })
+      })
   }
 }
 </script>

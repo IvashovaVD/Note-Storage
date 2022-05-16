@@ -52,13 +52,13 @@ def UserViewSet(request):
         serializer = UserSerializer(user, many=True, context={'request': request})
         return JsonResponse(serializer.data, safe=False)
     else:
-        return JsonResponse(serializer.errors, status=400)
+        return JsonResponse(serializer.errors, status=404)
 
 
 class SignUp(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     queryset = User.objects.all()
-    serializer_class = RegistrationSerializer
+    serializer_class=RegistrationSerializer
 
 
 @require_http_methods(['GET', 'POST'])
@@ -69,10 +69,9 @@ def login(request):
     if user is not None:
         print("Авторизация проходит без проблем!")
         auth.login(request, user)
+        return HttpResponse(status=200)
     else:
-        print("Ой, что-то пошло не так!")
-        user = 'error'
-    return HttpResponse(user)
+        return HttpResponse(status=404)
 
 
 def logout(request):

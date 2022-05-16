@@ -34,6 +34,10 @@ export default {
       note: []
     }
   },
-  computed: mapGetters(['folderss'])
+  computed: mapGetters(['folderss']),
+  created () {
+    let folder = this.$cookies.get('folder')
+    this.$store.dispatch('getFolders', folder)
+  }
 }
 </script>

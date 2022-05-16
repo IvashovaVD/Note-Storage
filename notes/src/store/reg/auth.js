@@ -15,8 +15,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const initialState = {
   authenticating: false,
   error: false,
-  token: null,
-  user: ''
+  token: null
 }
 
 const getters = {

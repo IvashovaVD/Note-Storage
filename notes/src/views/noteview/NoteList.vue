@@ -42,6 +42,7 @@ export default {
   methods: {
     deleteNote (note) {
       this.$store.dispatch('deleteNote', this.message)
+      this.$router.push({ name: 'note' })
     },
     deleteN (note) {
       // eslint-disable-next-line
@@ -62,10 +63,15 @@ export default {
       this.num_folder = this.id
       this.name = ''
       event.preventDefault()
+      this.$router.push({ name: 'note' })
     },
     createFolder (id) {
       this.$store.dispatch('putFolder', { num_user: id, name: this.name }) // TODO
     }
+  },
+  created () {
+    let folder = this.$cookies.get('folder')
+    this.$store.dispatch('getFolders', folder)
   }
 }
 </script>

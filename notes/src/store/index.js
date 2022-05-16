@@ -32,6 +32,11 @@ const state = {
   user: []
 }
 
+const initialState = {
+  folderss: [],
+  user: []
+}
+
 const getters = {
   folderss: state => state.folderss,
   user: state => state.user

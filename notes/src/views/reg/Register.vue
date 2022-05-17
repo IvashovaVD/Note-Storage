@@ -38,7 +38,6 @@ export default {
       inputs: {
         username: '',
         password: '',
-        password2: '',
         email: ''
       }
     }

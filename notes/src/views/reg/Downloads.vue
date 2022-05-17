@@ -1,6 +1,7 @@
 /* eslist-disable */
 <template lang="pug">
- folder</template>
+ folder
+ </template>
 <script>
 import folder from '@/components/Folder'
 export default {

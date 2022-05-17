@@ -19,8 +19,6 @@
         <i>{{note.urln}} </i>
         <hr width="100%" size="1" color="#5A5256" />
         <i class="folder-subject">create:  {{note.created_at}}</i>
-        <br>
-        <i class="folder-subject">update: {{note.updated_at}}</i>
 
     </form>
   </div>
@@ -51,22 +49,6 @@ export default {
       // eslint-disable-next-line
       this.message='http://127.0.0.1:8000/main/notes/'+ note +'/'
       axios.delete(this.message)
-    },
-    submitNote (id) {
-      // eslint-disable-next-line
-      this.message = 'Note '+ this.name +' created'
-      alert(this.message)
-      axios.put('http://127.0.0.1:8000/main/users/49/')
-        .then(response => {
-          this.user = response.data
-        })
-      this.num_folder = this.id
-      this.name = ''
-      event.preventDefault()
-      this.$router.push({ name: 'note' })
-    },
-    createFolder (id) {
-      this.$store.dispatch('putFolder', { num_user: id, name: this.name }) // TODO
     }
   },
   created () {

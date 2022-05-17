@@ -11,7 +11,6 @@
     <li class="list-li">
     <h4 style="color:#3fb984">{{not.name}} (Note)</h4>
         <sup>date create: {{not.created_at}}</sup> <br>
-        <sup>date update: {{not.updated_at}}</sup>
         <hr>
     <kbd width="100%">{{not.textn}}</kbd>
     <a v-bind:href="not.urln" class="list-a">{{not.urln}}</a>

@@ -37,7 +37,7 @@ export default {
       this.name = ''
       this.textn = ''
       this.urln = ''
-      alert('SUCCESS')
+      alert('Note created')
       event.preventDefault()
     },
     createNote () {

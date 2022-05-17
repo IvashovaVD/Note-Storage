@@ -4,10 +4,10 @@ from rest_framework import viewsets
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated, AllowAny
+
 from django.views.decorators.http import require_http_methods
 from django.contrib import auth
 
-import config
 from .models import Folder, Note, FileNote
 from server.apps.main.serializers import FolderSerializer, NoteSerializer, \
     UserSerializer, FolderCreateSerializer, FileNoteSerializer, \
@@ -58,7 +58,7 @@ def UserViewSet(request):
 class SignUp(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     queryset = User.objects.all()
-    serializer_class=RegistrationSerializer
+    serializer_class = RegistrationSerializer
 
 
 @require_http_methods(['GET', 'POST'])
